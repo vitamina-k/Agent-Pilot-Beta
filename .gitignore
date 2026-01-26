@@ -1,0 +1,95 @@
+# ============================================
+# Agent Pilot - Git Ignore
+# ============================================
+
+# ---- Environment ----
+.env
+.env.local
+.env.*.local
+*.env
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+env/
+
+# ---- Node.js ----
+node_modules/
+.npm
+.yarn-integrity
+
+# ---- Next.js ----
+.next/
+out/
+.vercel
+
+# ---- IDE ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Testing ----
+coverage/
+.nyc_output/
+.pytest_cache/
+htmlcov/
+
+# ---- Build ----
+*.pyc
+*.pyo
+*.pyd
+.cache/
+
+# ---- Misc ----
+*.bak
+*.tmp
+*.temp
+.session/
+*.session
+
+# ---- Secrets (never commit) ----
+secrets/
+credentials.json
+service-account.json
+*.pem
+*.key
+
+# ---- Telethon sessions ----
+*.session
+*.session-journal
+
+# ---- Local development ----
+.local/
+local_settings.py
