@@ -11,12 +11,12 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      // Check if user exists in usuarios_pro, if not create
+      // Get authenticated user
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (user) {
+      if (user?.email) {
         // Check if user profile exists
         const { data: profile } = await supabase
           .from("usuarios_pro")
