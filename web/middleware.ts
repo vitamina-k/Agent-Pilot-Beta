@@ -1,20 +1,31 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { updateSession } from './lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  return await updateSession(request)
+  try {
+    return await updateSession(request)
+  } catch (error) {
+    // If middleware fails, allow request to continue
+    // This prevents blocking on missing env vars or other issues
+    console.error('Middleware error:', error)
+    return NextResponse.next()
+  }
 }
 
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     * - api routes (handled separately)
+     * Only run middleware on protected routes:
+     * - /dashboard (and sub-routes)
+     * - /checkout (and sub-routes)
+     * - /callback (auth callback)
+     * - /api/stripe (Stripe endpoints)
+     * - /api/telegram (Telegram endpoints)
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/dashboard/:path*',
+    '/checkout/:path*',
+    '/callback',
+    '/api/stripe/:path*',
+    '/api/telegram/:path*',
   ],
 }
