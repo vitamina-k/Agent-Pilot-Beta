@@ -44,13 +44,13 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
+    <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Preguntas frecuentes
           </h2>
-          <p className="text-xl text-slate-300">
+          <p className="text-xl text-gray-600">
             Todo lo que necesitas saber sobre Agent Pilot
           </p>
         </div>
@@ -59,15 +59,15 @@ export function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-slate-900/50 border border-slate-700 rounded-xl overflow-hidden"
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"
             >
               <button
-                className="w-full px-6 py-4 flex justify-between items-center text-left"
+                className="w-full px-6 py-4 flex justify-between items-center text-left hover:bg-gray-50 transition"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span className="font-semibold text-white">{faq.question}</span>
+                <span className="font-semibold text-gray-900">{faq.question}</span>
                 <svg
-                  className={`w-5 h-5 text-slate-400 transition-transform ${
+                  className={`w-5 h-5 text-gray-400 transition-transform ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -84,7 +84,7 @@ export function FAQ() {
               </button>
               {openIndex === index && (
                 <div className="px-6 pb-4">
-                  <p className="text-slate-300">{faq.answer}</p>
+                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
                 </div>
               )}
             </div>
