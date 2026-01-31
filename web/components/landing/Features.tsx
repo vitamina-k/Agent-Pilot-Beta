@@ -1,37 +1,39 @@
+import { Brain, Zap, UserCircle, Key, Smartphone, BarChart3 } from "lucide-react";
+
 export function Features() {
   const features = [
     {
-      icon: "🧠",
+      icon: Brain,
       title: "Consejo de Sabios",
       description:
         "4 IAs analizan tu consulta y llegan a un consenso. Resultados más precisos y equilibrados que cualquier IA individual.",
     },
     {
-      icon: "⚡",
+      icon: Zap,
       title: "Modo FAST",
       description:
         "¿Necesitas una respuesta rápida? El modo FAST usa una sola IA para respuestas instantáneas por solo 1 crédito.",
     },
     {
-      icon: "👤",
+      icon: UserCircle,
       title: "Perfil de Entrenamiento",
       description:
         "Configura tu tono, valores y estilo. La IA genera contenido que suena exactamente como tú.",
     },
     {
-      icon: "🔑",
+      icon: Key,
       title: "BYOA (Bring Your Own API)",
       description:
         "Usa tus propias API keys para costes aún menores. Compatible con OpenAI, Anthropic, DeepSeek y Perplexity.",
     },
     {
-      icon: "📱",
+      icon: Smartphone,
       title: "Telegram + Web",
       description:
         "Genera contenido desde Telegram o gestiona todo desde el dashboard web. Sincronización perfecta.",
     },
     {
-      icon: "📊",
+      icon: BarChart3,
       title: "Historial y Analytics",
       description:
         "Revisa todo tu contenido generado. Aprende qué funciona mejor con insights detallados.",
@@ -56,7 +58,7 @@ export function Features() {
               key={index}
               className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
+              <feature.icon className="w-10 h-10 text-blue-400 mb-4" />
               <h3 className="text-xl font-semibold text-white mb-2">
                 {feature.title}
               </h3>

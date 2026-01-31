@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Brain } from "lucide-react";
 
 export function Hero() {
   return (
@@ -6,7 +7,8 @@ export function Hero() {
       <div className="max-w-7xl mx-auto text-center">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-8">
-          <span className="text-blue-400 text-sm font-medium">🧠 Consejo de Sabios</span>
+          <Brain className="w-4 h-4 text-blue-400" />
+          <span className="text-blue-400 text-sm font-medium">Consejo de Sabios</span>
           <span className="text-slate-400 text-sm">Múltiples IAs en consenso</span>
         </div>
 

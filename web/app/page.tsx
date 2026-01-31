@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Bot } from "lucide-react";
 import { Hero } from "@/components/landing/Hero";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Features } from "@/components/landing/Features";
 import { Pricing } from "@/components/landing/Pricing";
 import { FAQ } from "@/components/landing/FAQ";
@@ -12,7 +14,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🤖</span>
+              <Bot className="w-8 h-8 text-blue-400" />
               <span className="text-xl font-bold text-white">Agent Pilot</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
@@ -47,6 +49,7 @@ export default function Home() {
       {/* Main Content */}
       <main>
         <Hero />
+        <HowItWorks />
         <Features />
         <Pricing />
         <FAQ />
@@ -57,11 +60,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-2xl">🤖</span>
+              <Bot className="w-6 h-6 text-blue-400" />
               <span className="text-xl font-bold text-white">Agent Pilot</span>
             </div>
             <p className="text-slate-400 text-sm">
-              © 2024 Agent Pilot. Todos los derechos reservados.
+              © 2026 Agent Pilot. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-slate-400 hover:text-white transition text-sm">

@@ -51,7 +51,7 @@ export const PLANS: Record<PlanId, Plan> = {
   pro: {
     id: "pro",
     name: "Pro",
-    price: 29,
+    price: 29.90,
     priceId: process.env.STRIPE_PRICE_PRO || null,
     credits: 500,
     features: [
