@@ -2,15 +2,51 @@
 Agent Pilot Bot - Message Handlers
 ==================================
 Handlers for text messages (non-commands).
-Replace this placeholder with your complete handlers.
 """
 
 from telegram import Update
 from telegram.ext import ContextTypes
 
 from database.supabase_client import db
-from ai_swarm.orchestrator import CouncilOfWiseMen
-from config import CREDIT_COSTS
+from ai_swarm.orchestrator import CouncilOfWiseMen, SwarmMode, UserContext
+from config import settings, CREDIT_COSTS
+
+# Create the Council with system credentials (singleton)
+_council = None
+
+def get_council() -> CouncilOfWiseMen:
+    """Get or create the Council of Wise Men singleton."""
+    global _council
+    if _council is None:
+        system_credentials = {}
+        if settings.deepseek_api_key:
+            system_credentials["deepseek"] = settings.deepseek_api_key
+        if settings.perplexity_api_key:
+            system_credentials["perplexity"] = settings.perplexity_api_key
+        if settings.openai_api_key:
+            system_credentials["openai"] = settings.openai_api_key
+        if settings.anthropic_api_key:
+            system_credentials["anthropic"] = settings.anthropic_api_key
+
+        _council = CouncilOfWiseMen(
+            system_credentials=system_credentials,
+            cost_config=CREDIT_COSTS
+        )
+    return _council
+
+
+def build_user_context(user: dict, api_keys: dict = None) -> UserContext:
+    """Build UserContext from database user record."""
+    return UserContext(
+        user_id=user["id"],
+        telegram_id=user.get("telegram_user_id"),
+        bio_entrenamiento=user.get("bio_entrenamiento") or {},
+        memoria=[],  # TODO: Load from memoria_usuario table
+        preferencias={},
+        plan=user.get("plan_actual", "free"),
+        creditos_disponibles=user.get("creditos_disponibles", 0),
+        api_keys=api_keys or {}
+    )
 
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -22,7 +58,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     user = await db.get_user_by_telegram_id(telegram_id)
     if not user:
         await update.message.reply_text(
-            "❌ No tienes cuenta. Usa /start para registrarte."
+            "No tienes cuenta. Usa /start para registrarte."
         )
         return
 
@@ -42,51 +78,56 @@ async def handle_analysis_request(
     text: str
 ) -> None:
     """Process an analysis request."""
-    mode = context.user_data.get("analysis_mode", "fast")
-    cost = CREDIT_COSTS["fast"] if mode == "fast" else CREDIT_COSTS["consensus"]
+    mode_str = context.user_data.get("analysis_mode", "fast")
+    mode = SwarmMode.CONSENSUS if mode_str == "consensus" else SwarmMode.FAST
+    cost = CREDIT_COSTS["consensus"] if mode == SwarmMode.CONSENSUS else CREDIT_COSTS["fast"]
 
     # Check credits
     if user["creditos_disponibles"] < cost:
         await update.message.reply_text(
-            f"❌ Créditos insuficientes.\n"
-            f"Necesitas {cost} créditos, tienes {user['creditos_disponibles']}.\n\n"
-            f"Compra más en agentpilot.es/creditos"
+            f"Creditos insuficientes.\n"
+            f"Necesitas {cost} creditos, tienes {user['creditos_disponibles']}.\n\n"
+            f"Compra mas en tu dashboard web."
         )
         return
 
     # Send "typing" action
     await update.message.chat.send_action("typing")
 
-    # Deduct credits
-    await db.deduct_credits(
-        user["id"],
-        cost,
-        f"Análisis {mode}: {text[:50]}..."
-    )
-
     # Process with AI
     try:
-        # Initialize Council (placeholder - replace with your orchestrator)
-        council = CouncilOfWiseMen(user.get("bio_entrenamiento", {}))
+        council = get_council()
+        user_context = build_user_context(user)
 
-        if mode == "consensus":
-            result = await council.analyze_with_consensus(text)
-        else:
-            result = await council.quick_analyze(text)
+        # Call the orchestrator
+        result = await council.process(
+            prompt=text,
+            user_context=user_context,
+            mode=mode
+        )
+
+        if not result.success:
+            raise Exception(result.error or "Error desconocido")
+
+        # Deduct credits after successful processing
+        await db.deduct_credits(
+            user["id"],
+            cost,
+            f"Analisis {mode.value}: {text[:50]}..."
+        )
 
         # Format response
-        response = f"📊 *Análisis {'(Consenso)' if mode == 'consensus' else '(Fast)'}*\n\n"
-        response += result
-        response += f"\n\n💰 Créditos restantes: {user['creditos_disponibles'] - cost}"
+        mode_name = "Consenso" if mode == SwarmMode.CONSENSUS else "Fast"
+        response = f"*Analisis ({mode_name})*\n\n"
+        response += result.final_response
+        response += f"\n\n_Creditos restantes: {user['creditos_disponibles'] - cost}_"
 
         await update.message.reply_text(response, parse_mode="Markdown")
 
     except Exception as e:
-        # Refund on error
-        await db.add_credits(user["id"], cost, "Reembolso por error")
         await update.message.reply_text(
-            f"❌ Error al procesar: {str(e)}\n"
-            f"Se han reembolsado tus créditos."
+            f"Error al procesar: {str(e)}\n"
+            f"No se han descontado creditos."
         )
 
     # Clear state

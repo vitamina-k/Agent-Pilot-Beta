@@ -107,11 +107,12 @@ async def handle_vincular(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 async def handle_modo_fast(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle FAST mode selection."""
     context.user_data["analysis_mode"] = "fast"
+    context.user_data["awaiting_analysis"] = True
     query = update.callback_query
     await query.edit_message_text(
-        "⚡ *Modo FAST seleccionado*\n\n"
+        "*Modo FAST seleccionado*\n\n"
         "Ahora envíame el texto o tema a analizar.\n"
-        "Coste: 1 crédito",
+        "Coste: 1 credito",
         parse_mode="Markdown"
     )
 
@@ -130,12 +131,13 @@ async def handle_modo_consenso(update: Update, context: ContextTypes.DEFAULT_TYP
         return
 
     context.user_data["analysis_mode"] = "consensus"
+    context.user_data["awaiting_analysis"] = True
     query = update.callback_query
     await query.edit_message_text(
-        "🧠 *Modo Consenso seleccionado*\n\n"
-        "Múltiples IAs analizarán tu consulta.\n"
-        "Ahora envíame el texto o tema.\n"
-        "Coste: 5 créditos",
+        "*Modo Consenso seleccionado*\n\n"
+        "Multiples IAs analizaran tu consulta.\n"
+        "Ahora enviame el texto o tema.\n"
+        "Coste: 5 creditos",
         parse_mode="Markdown"
     )
 

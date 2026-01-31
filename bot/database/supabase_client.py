@@ -46,12 +46,25 @@ class SupabaseClient:
         return response.data
 
     async def create_user(self, telegram_id: int, **kwargs) -> dict:
-        """Create a new user from Telegram."""
+        """Create a new user from Telegram with welcome credits."""
         data = {
             "telegram_user_id": telegram_id,
+            "creditos_disponibles": 50,  # Welcome credits
+            "plan_actual": "free",
             **kwargs
         }
         response = self.client.table("usuarios_pro").insert(data).execute()
+
+        # Record welcome transaction
+        if response.data:
+            user = response.data[0]
+            self.client.table("transacciones").insert({
+                "usuario_id": user["id"],
+                "tipo": "bienvenida",
+                "creditos": 50,
+                "concepto": "Creditos de bienvenida",
+            }).execute()
+
         return response.data[0]
 
     async def update_user(self, user_id: str, **kwargs) -> dict:
