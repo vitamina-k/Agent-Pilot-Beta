@@ -1,3 +1,5 @@
+import { MessageSquare, Settings, PenLine, Brain, Sparkles, Send, Play } from "lucide-react";
+
 export function HowItWorks() {
   const steps = [
     {
@@ -5,42 +7,42 @@ export function HowItWorks() {
       title: "Conecta con el Bot",
       description:
         "Abre Telegram y busca @AgentPilotBot. Envía /start para comenzar. En segundos tendrás acceso al Consejo de Sabios.",
-      icon: "📱",
+      icon: MessageSquare,
     },
     {
       number: "2",
       title: "Configura tu Perfil",
       description:
         "Define tu tono, valores y estilo de comunicación. El bot aprenderá a generar contenido que suena exactamente como tú.",
-      icon: "⚙️",
+      icon: Settings,
     },
     {
       number: "3",
       title: "Haz tu Consulta",
       description:
         "Escribe lo que necesitas: un post para LinkedIn, un hilo de Twitter, ideas de contenido, análisis de mercado... lo que sea.",
-      icon: "💬",
+      icon: PenLine,
     },
     {
       number: "4",
       title: "El Consejo Delibera",
       description:
         "4 IAs analizan tu consulta de forma independiente. DeepSeek, Perplexity, GPT-4 y Claude trabajan en paralelo.",
-      icon: "🧠",
+      icon: Brain,
     },
     {
       number: "5",
       title: "Consenso Inteligente",
       description:
         "Las respuestas se sintetizan en un resultado final que combina lo mejor de cada IA. Más preciso y equilibrado.",
-      icon: "✨",
+      icon: Sparkles,
     },
     {
       number: "6",
       title: "Contenido Listo",
       description:
         "Recibe tu contenido personalizado en segundos. Copia, edita si quieres, y publica. Así de simple.",
-      icon: "🚀",
+      icon: Send,
     },
   ];
 
@@ -72,9 +74,7 @@ export function HowItWorks() {
                 </div>
 
                 <div className="pt-4">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
-                    {step.icon}
-                  </div>
+                  <step.icon className="w-10 h-10 text-blue-400 mb-4 group-hover:scale-110 transition-transform" />
                   <h3 className="text-xl font-semibold text-white mb-2">
                     {step.title}
                   </h3>
@@ -96,7 +96,7 @@ export function HowItWorks() {
             </p>
             <div className="aspect-video bg-slate-900 rounded-lg flex items-center justify-center border border-slate-600">
               <div className="text-center">
-                <div className="text-6xl mb-4">▶️</div>
+                <Play className="w-16 h-16 text-blue-400 mx-auto mb-4" />
                 <p className="text-slate-400">Demo próximamente</p>
               </div>
             </div>
