@@ -33,13 +33,13 @@ export interface Plan {
 }
 
 // Plans configuration
-// Note: Replace priceId values with your actual Stripe Price IDs from the dashboard
+// Using NEXT_PUBLIC_ prefix for client-side access
 export const PLANS: Record<PlanId, Plan> = {
   starter: {
     id: "starter",
     name: "Starter",
     price: 9,
-    priceId: process.env.STRIPE_PRICE_STARTER || null,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_STARTER || null,
     credits: 100,
     features: [
       "100 consultas/mes",
@@ -52,7 +52,7 @@ export const PLANS: Record<PlanId, Plan> = {
     id: "pro",
     name: "Pro",
     price: 29.90,
-    priceId: process.env.STRIPE_PRICE_PRO || null,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO || null,
     credits: 500,
     features: [
       "500 consultas/mes",
@@ -66,7 +66,7 @@ export const PLANS: Record<PlanId, Plan> = {
     id: "enterprise",
     name: "Enterprise",
     price: 99,
-    priceId: process.env.STRIPE_PRICE_ENTERPRISE || null,
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ENTERPRISE || null,
     credits: 2000,
     features: [
       "2000 consultas/mes",

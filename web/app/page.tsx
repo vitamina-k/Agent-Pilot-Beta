@@ -67,13 +67,13 @@ export default function Home() {
               © 2026 Agent Pilot. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="text-slate-400 hover:text-white transition text-sm">
+              <Link href="/privacidad" className="text-slate-400 hover:text-white transition text-sm">
                 Privacidad
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition text-sm">
+              </Link>
+              <Link href="/terminos" className="text-slate-400 hover:text-white transition text-sm">
                 Términos
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition text-sm">
+              </Link>
+              <a href="mailto:contacto@agentpilot.es" className="text-slate-400 hover:text-white transition text-sm">
                 Contacto
               </a>
             </div>
