@@ -12,11 +12,11 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
-  // Get user profile
+  // Get user profile (case-insensitive email match)
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .eq("email", user.email)
+    .ilike("email", user.email?.toLowerCase() || "")
     .single();
 
   // Get recent transactions
