@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .eq("email", user.email)
+    .eq("correo_electronico", user.email)
     .single();
 
   const navigation = [

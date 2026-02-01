@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     const { data: user, error: userError } = await supabase
       .from("usuarios_pro")
       .select("id, telegram_user_id")
-      .eq("email", email)
+      .eq("correo_electronico", email)
       .single();
 
     if (userError || !user) {

@@ -17,7 +17,7 @@ export default async function CreditosPage() {
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .eq("email", user.email)
+    .eq("correo_electronico", user.email)
     .single();
 
   // Get all transactions
