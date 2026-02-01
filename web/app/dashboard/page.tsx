@@ -127,7 +127,7 @@ export default async function DashboardPage() {
             </span>
             {!isTelegramLinked && (
               <a
-                href="https://t.me/AgentPilotBot"
+                href="https://t.me/AgentPilotx_Bot"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-400 hover:text-blue-300 text-sm ml-auto"
@@ -143,7 +143,7 @@ export default async function DashboardPage() {
             </div>
             <span className="text-white">Prueba el modo Consenso</span>
             <a
-              href="https://t.me/AgentPilotBot"
+              href="https://t.me/AgentPilotx_Bot"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 text-sm ml-auto"

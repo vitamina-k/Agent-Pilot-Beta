@@ -129,7 +129,7 @@ export default async function HistorialPage() {
               Empieza a usar Agent Pilot para ver tu historial de contenido aquí.
             </p>
             <a
-              href="https://t.me/AgentPilotBot"
+              href="https://t.me/AgentPilotx_Bot"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition"

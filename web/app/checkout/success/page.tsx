@@ -20,7 +20,7 @@ export default function CheckoutSuccessPage() {
             Ir al Dashboard
           </Link>
           <a
-            href="https://t.me/AgentPilotBot"
+            href="https://t.me/AgentPilotx_Bot"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-3 rounded-lg font-semibold transition"

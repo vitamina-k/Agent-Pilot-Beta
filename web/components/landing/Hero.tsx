@@ -36,7 +36,7 @@ export function Hero() {
             Empezar gratis
           </Link>
           <a
-            href="https://t.me/AgentPilotBot"
+            href="https://t.me/AgentPilotx_Bot"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white hover:bg-gray-50 text-gray-700 px-8 py-4 rounded-full text-lg font-semibold transition border border-gray-200 flex items-center justify-center gap-2"

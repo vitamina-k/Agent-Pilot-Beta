@@ -6,7 +6,7 @@ export function HowItWorks() {
       number: "1",
       title: "Conecta con el Bot",
       description:
-        "Abre Telegram y busca @AgentPilotBot. Envía /start para comenzar. En segundos tendrás acceso al Consejo de Sabios.",
+        "Abre Telegram y busca @AgentPilotx_Bot. Envía /start para comenzar. En segundos tendrás acceso al Consejo de Sabios.",
       icon: MessageSquare,
     },
     {
