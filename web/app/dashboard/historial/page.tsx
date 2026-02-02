@@ -16,7 +16,7 @@ export default async function HistorialPage() {
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("id")
-    .eq("correo_electronico", user.email)
+    .ilike("correo_electronico", user.email?.toLowerCase() || "")
     .single();
 
   // Get content history

@@ -40,7 +40,7 @@ export default function PerfilPage() {
     const { data } = await supabase
       .from("usuarios_pro")
       .select("bio_entrenamiento")
-      .eq("correo_electronico", user.email)
+      .ilike("correo_electronico", user.email?.toLowerCase() || "")
       .single();
 
     if (data?.bio_entrenamiento) {
@@ -61,7 +61,7 @@ export default function PerfilPage() {
     const { error } = await supabase
       .from("usuarios_pro")
       .update({ bio_entrenamiento: bio })
-      .eq("correo_electronico", user.email);
+      .ilike("correo_electronico", user.email?.toLowerCase() || "");
 
     setSaving(false);
     if (!error) {

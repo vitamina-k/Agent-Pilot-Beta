@@ -16,11 +16,11 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
-  // Get user profile
+  // Get user profile (case-insensitive)
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .eq("correo_electronico", user.email)
+    .ilike("correo_electronico", user.email?.toLowerCase() || "")
     .single();
 
   const navigation = [
