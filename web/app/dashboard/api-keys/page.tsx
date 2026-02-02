@@ -42,7 +42,7 @@ export default function ApiKeysPage() {
     const { data: profile } = await supabase
       .from("usuarios_pro")
       .select("id")
-      .ilike("correo_electronico", user.email?.toLowerCase() || "")
+      .eq("correo_electronico", user.email)
       .single();
 
     if (profile) {
@@ -74,7 +74,7 @@ export default function ApiKeysPage() {
     const { data: profile } = await supabase
       .from("usuarios_pro")
       .select("id")
-      .ilike("correo_electronico", user.email?.toLowerCase() || "")
+      .eq("correo_electronico", user.email)
       .single();
 
     if (!profile) return;
