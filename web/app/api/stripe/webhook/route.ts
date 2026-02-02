@@ -44,7 +44,7 @@ export async function POST(req: Request) {
             const { data: user } = await supabase
               .from("usuarios_pro")
               .select("id, creditos_disponibles")
-              .eq("correo_electronico", session.customer_email)
+              .eq("Correo_Electronico", session.customer_email)
               .single();
 
             if (user) {
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
             const { data: user } = await supabase
               .from("usuarios_pro")
               .select("id, creditos_disponibles")
-              .eq("correo_electronico", session.customer_email)
+              .eq("Correo_Electronico", session.customer_email)
               .single();
 
             if (user) {
@@ -116,7 +116,7 @@ export async function POST(req: Request) {
             const { data: user } = await supabase
               .from("usuarios_pro")
               .select("id, creditos_disponibles")
-              .eq("correo_electronico", invoice.customer_email)
+              .eq("Correo_Electronico", invoice.customer_email)
               .single();
 
             if (user) {

@@ -16,7 +16,7 @@ export default async function DashboardPage() {
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .ilike("correo_electronico", user.email?.toLowerCase() || "")
+    .ilike("Correo_Electronico", user.email?.toLowerCase() || "")
     .single();
 
   // Get recent transactions

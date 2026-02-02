@@ -22,24 +22,24 @@ export async function GET(request: Request) {
         // Check if user profile exists (case-insensitive)
         const { data: profile } = await supabase
           .from("usuarios_pro")
-          .select("id, correo_electronico")
-          .ilike("correo_electronico", emailLower)
+          .select("id, Correo_Electronico")
+          .ilike("Correo_Electronico", emailLower)
           .single();
 
         if (!profile) {
           // Create user profile with welcome credits
           await supabase.from("usuarios_pro").insert({
-            correo_electronico: emailLower,
+            Correo_Electronico: emailLower,
             creditos_disponibles: 50,
             plan_actual: "free",
             estado: "activo",
             bio_entrenamiento: {},
           });
-        } else if (profile.correo_electronico !== emailLower) {
+        } else if (profile.Correo_Electronico !== emailLower) {
           // Update email to match auth email (normalize case)
           await supabase
             .from("usuarios_pro")
-            .update({ correo_electronico: emailLower })
+            .update({ Correo_Electronico: emailLower })
             .eq("id", profile.id);
         }
       }
