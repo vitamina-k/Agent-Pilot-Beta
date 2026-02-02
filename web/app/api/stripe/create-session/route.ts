@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     const { data: profile } = await supabase
       .from("usuarios_pro")
       .select("stripe_customer_id")
-      .ilike("Correo_Electronico", user.email?.toLowerCase() || "")
+      .ilike("correo_electronico", user.email?.toLowerCase() || "")
       .single();
 
     let customerId = profile?.stripe_customer_id;
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
       await supabase
         .from("usuarios_pro")
         .update({ stripe_customer_id: customerId })
-        .ilike("Correo_Electronico", user.email?.toLowerCase() || "");
+        .ilike("correo_electronico", user.email?.toLowerCase() || "");
     }
 
     // Create checkout session

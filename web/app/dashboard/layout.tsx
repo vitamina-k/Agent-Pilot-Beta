@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   const { data: profile } = await supabase
     .from("usuarios_pro")
     .select("*")
-    .ilike("Correo_Electronico", user.email?.toLowerCase() || "")
+    .ilike("correo_electronico", user.email?.toLowerCase() || "")
     .single();
 
   const navigation = [
